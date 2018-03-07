@@ -15,8 +15,8 @@
  */
 'use strict';
 
-// Initializes AjencyChat.
-function AjencyChat() {
+// Initializes FriendlyChat.
+function FriendlyChat() {
   this.checkSetup();
 
   // Shortcuts to DOM Elements.
@@ -54,17 +54,17 @@ function AjencyChat() {
 }
 
 // Sets up shortcuts to Firebase features and initiate firebase auth.
-AjencyChat.prototype.initFirebase = function() {
+FriendlyChat.prototype.initFirebase = function() {
   // TODO(DEVELOPER): Initialize Firebase.
 };
 
 // Loads chat messages history and listens for upcoming ones.
-AjencyChat.prototype.loadMessages = function() {
+FriendlyChat.prototype.loadMessages = function() {
   // TODO(DEVELOPER): Load and listens for new messages.
 };
 
 // Saves a new message on the Firebase DB.
-AjencyChat.prototype.saveMessage = function(e) {
+FriendlyChat.prototype.saveMessage = function(e) {
   e.preventDefault();
   // Check that the user entered a message and is signed in.
   if (this.messageInput.value && this.checkSignedInWithMessage()) {
@@ -75,7 +75,7 @@ AjencyChat.prototype.saveMessage = function(e) {
 };
 
 // Sets the URL of the given img element with the URL of the image stored in Cloud Storage.
-AjencyChat.prototype.setImageUrl = function(imageUri, imgElement) {
+FriendlyChat.prototype.setImageUrl = function(imageUri, imgElement) {
   imgElement.src = imageUri;
 
   // TODO(DEVELOPER): If image is on Cloud Storage, fetch image URL and set img element's src.
@@ -83,7 +83,7 @@ AjencyChat.prototype.setImageUrl = function(imageUri, imgElement) {
 
 // Saves a new message containing an image URI in Firebase.
 // This first saves the image in Firebase storage.
-AjencyChat.prototype.saveImageMessage = function(event) {
+FriendlyChat.prototype.saveImageMessage = function(event) {
   event.preventDefault();
   var file = event.target.files[0];
 
@@ -108,17 +108,17 @@ AjencyChat.prototype.saveImageMessage = function(event) {
 };
 
 // Signs-in Friendly Chat.
-AjencyChat.prototype.signIn = function() {
+FriendlyChat.prototype.signIn = function() {
   // TODO(DEVELOPER): Sign in Firebase with credential from the Google user.
 };
 
 // Signs-out of Friendly Chat.
-AjencyChat.prototype.signOut = function() {
+FriendlyChat.prototype.signOut = function() {
   // TODO(DEVELOPER): Sign out of Firebase.
 };
 
 // Triggers when the auth state change for instance when the user signs-in or signs-out.
-AjencyChat.prototype.onAuthStateChanged = function(user) {
+FriendlyChat.prototype.onAuthStateChanged = function(user) {
   if (user) { // User is signed in!
     // Get profile pic and user's name from the Firebase user object.
     var profilePicUrl = null;   // TODO(DEVELOPER): Get profile pic.
@@ -153,7 +153,7 @@ AjencyChat.prototype.onAuthStateChanged = function(user) {
 };
 
 // Returns true if user is signed-in. Otherwise false and displays a message.
-AjencyChat.prototype.checkSignedInWithMessage = function() {
+FriendlyChat.prototype.checkSignedInWithMessage = function() {
   /* TODO(DEVELOPER): Check if user is signed-in Firebase. */
 
   // Display a message to the user using a Toast.
@@ -166,23 +166,23 @@ AjencyChat.prototype.checkSignedInWithMessage = function() {
 };
 
 // Saves the messaging device token to the datastore.
-AjencyChat.prototype.saveMessagingDeviceToken = function() {
+FriendlyChat.prototype.saveMessagingDeviceToken = function() {
   // TODO(DEVELOPER): Save the device token in the realtime datastore
 };
 
 // Requests permissions to show notifications.
-AjencyChat.prototype.requestNotificationsPermissions = function() {
+FriendlyChat.prototype.requestNotificationsPermissions = function() {
   // TODO(DEVELOPER): Request permissions to send notifications.
 };
 
 // Resets the given MaterialTextField.
-AjencyChat.resetMaterialTextfield = function(element) {
+FriendlyChat.resetMaterialTextfield = function(element) {
   element.value = '';
   element.parentNode.MaterialTextfield.boundUpdateClassesHandler();
 };
 
 // Template for messages.
-AjencyChat.MESSAGE_TEMPLATE =
+FriendlyChat.MESSAGE_TEMPLATE =
     '<div class="message-container">' +
       '<div class="spacing"><div class="pic"></div></div>' +
       '<div class="message"></div>' +
@@ -190,15 +190,15 @@ AjencyChat.MESSAGE_TEMPLATE =
     '</div>';
 
 // A loading image URL.
-AjencyChat.LOADING_IMAGE_URL = 'https://www.google.com/images/spin-32.gif';
+FriendlyChat.LOADING_IMAGE_URL = 'https://www.google.com/images/spin-32.gif';
 
 // Displays a Message in the UI.
-AjencyChat.prototype.displayMessage = function(key, name, text, picUrl, imageUri) {
+FriendlyChat.prototype.displayMessage = function(key, name, text, picUrl, imageUri) {
   var div = document.getElementById(key);
   // If an element for that message does not exists yet we create it.
   if (!div) {
     var container = document.createElement('div');
-    container.innerHTML = AjencyChat.MESSAGE_TEMPLATE;
+    container.innerHTML = FriendlyChat.MESSAGE_TEMPLATE;
     div = container.firstChild;
     div.setAttribute('id', key);
     this.messageList.appendChild(div);
@@ -229,7 +229,7 @@ AjencyChat.prototype.displayMessage = function(key, name, text, picUrl, imageUri
 
 // Enables or disables the submit button depending on the values of the input
 // fields.
-AjencyChat.prototype.toggleButton = function() {
+FriendlyChat.prototype.toggleButton = function() {
   if (this.messageInput.value) {
     this.submitButton.removeAttribute('disabled');
   } else {
@@ -238,7 +238,7 @@ AjencyChat.prototype.toggleButton = function() {
 };
 
 // Checks that the Firebase SDK has been correctly setup and configured.
-AjencyChat.prototype.checkSetup = function() {
+FriendlyChat.prototype.checkSetup = function() {
   if (!window.firebase || !(firebase.app instanceof Function) || !firebase.app().options) {
     window.alert('You have not configured and imported the Firebase SDK. ' +
         'Make sure you go through the codelab setup instructions and make ' +
@@ -247,5 +247,5 @@ AjencyChat.prototype.checkSetup = function() {
 };
 
 window.onload = function() {
-  window.AjencyChat = new AjencyChat();
+  window.friendlyChat = new FriendlyChat();
 };

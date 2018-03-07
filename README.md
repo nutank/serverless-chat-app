@@ -1,1 +1,1 @@
-# serverless-chat-app
+# Simple serverless chat app using Firebase 

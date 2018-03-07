@@ -1,0 +1,16 @@
+{
+  "messages" : {
+    "-K2ib4H77rj0LYewF7dP" : {
+      "text" : "Hello",
+      "name" : "anonymous"
+    },
+    "-K2ib4H77rj0LYewF7dQ" : {
+      "text" : "How are you?",
+      "name" : "anonymous"
+    }, 
+    "-K2ib4H77rj0LYewF7dA" : {
+      "text" : "I am fine, Thank you!",
+      "name" : "anonymous"
+    }       
+  }
+}

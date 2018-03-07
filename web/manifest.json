@@ -1,0 +1,7 @@
+{
+  "name": "Ajency Chat",
+  "short_name": "Ajency Chat",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "orientation": "portrait"
+}

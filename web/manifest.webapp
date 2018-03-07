@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "name": "Web Chat",
+  "name": "Ajency Chat",
   "launch_path": "/index.html",
   "description": "Chat with friends using Firebase 2.0",
   "developer": {
@@ -15,7 +15,7 @@
   },
   "locales": {
     "en": {
-      "name": "Web Chat",
+      "name": "Ajency Chat",
       "description": "Chat with friends using Firebase 2.0"
     }
   }

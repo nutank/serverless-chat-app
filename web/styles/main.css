@@ -22,7 +22,7 @@ main, #messages-card {
   padding-bottom: 0;
 }
 #messages-card-container {
-  height: calc(100% - 150px);
+  height: calc(100% - 50px);
   padding-bottom: 0;
 }
 #messages-card {
@@ -175,7 +175,7 @@ main, #messages-card {
   }
   #user-container {
     top: 72px;
-    background-color: rgb(3,155,229);
+    /* background-color: rgb(3,155,229); */
     height: 38px;
     padding-top: 3px;
     padding-right: 2px;
@@ -196,4 +196,12 @@ main, #messages-card {
 .mdl-button .material-icons {
   top: -1px;
   margin-right: 5px;
+}
+
+/* Custom Styles */
+.bg-w-img{
+  background-image: url('../images/46A8888_89_90-1.jpg');
+  background-image: url('../images/Arches-NP-Tree-At-Sunset-1-2-1-by-Shawn-McClure.jpg');
+  background-size: cover;
+  box-shadow: inset 0 0 0px 500px rgba(0, 0, 0, 0.35);
 }

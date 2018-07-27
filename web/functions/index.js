@@ -14,12 +14,64 @@
  * limitations under the License.
  */
 
-// Note: You will edit this file in the follow up codelab about the Cloud Functions for Firebase.
+const functions = require('firebase-functions');
 
-// TODO(DEVELOPER): Import the Cloud Functions for Firebase and the Firebase Admin modules here.
+// // Create and Deploy Your First Cloud Functions
+// // https://firebase.google.com/docs/functions/write-firebase-functions
+//
+// exports.helloWorld = functions.https.onRequest((request, response) => {
+//  response.send("Hello from Firebase!");
+// });
+// 
 
-// TODO(DEVELOPER): Write the addWelcomeMessages Function here.
+// The Firebase Admin SDK to access the Firebase Realtime Database.
+const admin = require('firebase-admin');
+admin.initializeApp();
 
-// TODO(DEVELOPER): Write the blurOffensiveImages Function here.
 
-// TODO(DEVELOPER): Write the sendNotifications Function here.
+// replaces keywords with emoji in the "text" key of messages
+// pushed to /messages
+exports.emojify = functions.database.ref('/messages/{pushId}/text')
+	.onCreate((snapshot, context) => {
+
+        // Now we begin the emoji transformation
+        console.log("emojifying!");
+
+        // Get the value from the 'text' key of the message
+        const originalText = snapshot.val();
+
+        console.log(originalText);
+        const emojifiedText = emojifyText(originalText);
+
+        // Return a JavaScript Promise to update the database node
+        return snapshot.ref.parent.child('text').set(emojifiedText);
+    });
+
+
+// Returns text with keywords replaced by emoji
+// Replacing with the regular expression /.../ig does a case-insensitive
+// search (i flag) for all occurrences (g flag) in the string
+function emojifyText(text) {
+    var emojifiedText = text;
+    emojifiedText = emojifiedText.replace(/\blol\b/ig, "😂");
+    emojifiedText = emojifiedText.replace(/\bcat\b/ig, "😸");
+    emojifiedText = emojifiedText.replace(/\bgrin\b/ig, "😬");
+    return emojifiedText;
+}
+
+
+
+// Listens for new messages added to /messages/:pushId/original and creates an
+// uppercase version of the message to /messages/:pushId/uppercase
+exports.makeUppercase = functions.database.ref('/messages/{pushId}/original')
+    .onCreate((snapshot, context) => {
+      // Grab the current value of what was written to the Realtime Database.
+      const original = snapshot.val();
+      console.log('Uppercasing', context.params.pushId, original);
+      const uppercase = original.toUpperCase();
+      // You must return a Promise when performing asynchronous tasks inside a Functions such as
+      // writing to the Firebase Realtime Database.
+      // Setting an "uppercase" sibling in the Realtime Database returns a Promise.
+      return snapshot.ref.parent.child('uppercase').set(uppercase);
+    }); 
+
